@@ -1,10 +1,10 @@
 import { Metadata, ResolvingMetadata } from 'next';
 
-type PageProps = {
+type Props = {
   params: Promise<{ profile_id: string }>;
 };
 
-export async function generateMetadata({ params }: PageProps, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
   const profileId = (await params).profile_id;
   return {
     title: profileId,
@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
   };
 }
 
-export default async function ProfilePage({ params }: PageProps) {
+export default async function ProfilePage({ params }: Props) {
   const { profile_id } = await params;
 
   return (
