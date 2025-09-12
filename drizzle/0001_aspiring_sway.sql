@@ -1,0 +1,1 @@
+DROP INDEX `posts_table_author_id_unique`;
