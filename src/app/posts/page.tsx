@@ -1,14 +1,20 @@
-import PostsLists from '#/components/PostsLists';
-import { getPosts } from '#/lib/api/posts';
+import PostsLists from '#/components/PostsList';
+import PostsListSkeleton from '#/components/PostsListSkeleton';
+import { Metadata } from 'next';
+import { Suspense } from 'react';
 
 export const dynamic = 'force-dynamic';
 
+export const metadata: Metadata = {
+  title: 'Posts',
+};
+
 export default async function PostsPage() {
-  const posts = await getPosts();
-
-  if (posts.length === 0) {
-    return <p>No posts yet. Be the first to write one!</p>;
-  }
-
-  return <PostsLists posts={posts} />;
+  return (
+    <>
+      <Suspense fallback={<PostsListSkeleton />}>
+        <PostsLists />
+      </Suspense>
+    </>
+  );
 }
